@@ -2,8 +2,10 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate  #, login
 from .forms import LoginForm
+
+from django.contrib.auth.decorators import login_required
 
 
 # post or get => form is valid => cleaned data => user 认证 => user active
@@ -25,3 +27,8 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request, 'account/login.html', {"form": form})
+
+
+@login_required
+def dashboard(request):
+    return render(request, "account/dashboard.html", {"section": 'dashboard'})

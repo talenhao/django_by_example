@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}
+    登出
+{% endblock %}
+
+{% block content %}
+    <h1>您已经退出登陆.</h1>
+    <p>如果再次登陆,请点击<a href="{% url "login" %}">重新登陆</a>. </p>
+{% endblock %}

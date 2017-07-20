@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+    登陆
+{% endblock %}
+
+{% block content %}
+    <h1>请登陆系统</h1>
+    {% if form.errors %}
+        <p>登陆异常,请检查!</p>
+    {% else %}
+        <p>填写登陆信息.</p>
+    {% endif %}
+
+    <div class="login-form">
+        <form action="{% url "login" %}" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <p><input type="submit" value="登陆"></p>
+        </form>
+    </div>
+{% endblock %}
