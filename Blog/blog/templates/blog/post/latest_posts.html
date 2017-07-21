@@ -1,0 +1,8 @@
+<ul>
+    <!--注意这里的latest_posts不要写成latest.posts,这个不起眼的错误造成排查了好长时间-->
+    {% for post in latest_posts %}
+        <li>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </li>
+    {% endfor %}
+</ul>

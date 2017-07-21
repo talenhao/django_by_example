@@ -1,0 +1,38 @@
+{% load blog_tags %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "css/blog.css" %}" rel="stylesheet">
+</head>
+
+
+<body>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+<div id="sidebar">
+    <h2><a href="/blog/">Talen's Blog!</a> </h2>
+    <P>这是我的博客。在这里我已经发表了 {% total_posts %} 篇文章。</P>
+    <P><a href="{% url "blog:post_feed" %}">Subscribe to my RSS feed</a> </P>
+    <!--search-->
+    <h3>搜索文章:</h3>
+    <ul><li><a href="{% url "blog:post_search" %}">搜索</a></li></ul>
+    <!--latest posts-->
+    <h3>Latest Posts:</h3>
+    {% show_latest_posts 3 %}
+    <h3>The most comments Posts:</h3>
+    {% get_most_comments_posts 3 as most_comments_posts %}
+    <ul>
+        {% for post in most_comments_posts %}
+            <li>
+                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

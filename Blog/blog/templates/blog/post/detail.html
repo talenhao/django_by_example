@@ -1,0 +1,66 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p class="date">
+    Published {{ post.publish }} by {{ post.author }}.
+    </p>
+    <!--{{ post.body|linebreaks }}->>
+    <!--use filter: markdown-->
+        <p>{{ post.body|markdown }}</p>
+    <p>
+        <a href="{% url "blog:post_share" post.id %}">
+            Share this post.
+        </a>
+    </p>
+    <!--similar posts process-->
+    <h2>相关文章推荐：</h2>
+    {% for similar in similar_posts %}
+        <p>
+            <a href="{{ similar.get_absolute_url }}">{{ similar.title }}</a>
+        </p>
+    {% empty %}
+        <p>没有相关文章推荐。</p>
+    {% endfor %}
+    <!--comments process-->
+    {% with comments.count as total_comments %}
+        <h2>
+            {{ total_comments }} comment{{ total_comments|pluralize }}.
+        </h2>
+    {% endwith %}
+    {% for comment in comments %}
+        <div class="comment">
+            <p class="info">
+                Comment {{ forloop.counter }}
+            </p>
+            <p class="info">
+                by <em>{{ comment.name }}</em>
+            </p>
+            <p class="info">
+                at {{ comment.created }}
+            </p>
+            <!--add markdown-->
+            {{ comment.body|markdown }}
+        </div>
+    {% empty %}
+        <p>There are no comment yet.</p>
+    {% endfor %}
+    {% if commented %}
+        <h2>Your comment has been added!</h2>
+    {% else %}
+        <h2>Add a new comment.</h2>
+        <form action="." method="post">
+            {{ comments_form.as_p }}
+            {% csrf_token %}
+            <p>
+                <input type="submit" value="Add comment">
+            </p>
+        </form>
+    {% endif %}
+{% endblock %}
+
