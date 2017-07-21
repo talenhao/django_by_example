@@ -108,3 +108,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
+=======
+
+# Send Email
+EMAIL_HOST = 'smtp.xxx.com'
+EMAIL_PORT = xxx
+EMAIL_HOST_USER = 'xxx@xxx.com'
+EMAIL_HOST_PASSWORD = 'xxx'
+EMAIL_USE_SSL = True
+
+DEFAULT_FROM_EMAIL = 'xxx@xxx.com'
+>>>>>>> 83d7668... Reset password views 修改发件用户
