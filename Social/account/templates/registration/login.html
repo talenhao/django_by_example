@@ -18,6 +18,7 @@
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}" />
             <p><input type="submit" value="登陆"></p>
+            <p><a href="{% url "password_reset" %}">Forgotten your password?</a></p>
         </form>
     </div>
 {% endblock %}
