@@ -29,4 +29,7 @@ urlpatterns = [
         name='password_reset_confirm'),
     # templates/registration/password_reset_complete.html
     url(r'^password-reset/complate/$', password_reset_complete, name='password_reset_complete'),
+
+    # register
+    url(r'^register/$', views.register, name='register'),
 ]

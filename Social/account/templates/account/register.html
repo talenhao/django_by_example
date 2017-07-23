@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+    注册新用户
+{% endblock %}
+
+{% block content %}
+    <h1>注册新用户</h1>
+    <p>完整填写下面的表格:</p>
+    <form action="." method="post">
+        {{ user_register.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="注册">
+    </form>
+{% endblock %}
