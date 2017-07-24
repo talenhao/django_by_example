@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -126,4 +127,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
+    'social.backends.github.GithubOAuth2',
 )
+
+SOCIAL_AUTH_GITHUB_KEY = '242d25d2a05e410a92c5'
+SOCIAL_AUTH_GITHUB_SECRET = '284341b639cfc7a78c82bfeed5d95f09cd20818c'
