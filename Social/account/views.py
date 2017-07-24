@@ -12,6 +12,7 @@ from .forms import UserRegistrationForm
 from .models import Profile
 from .forms import ProfileEditForm, UserEditForm
 
+from django.contrib import messages
 
 # post or get => form is valid => cleaned data => user 认证 => user active
 def user_login(request):
@@ -67,9 +68,10 @@ def profile_edit(request):
             username = "{} {}".format(cd['last_name'], cd['first_name'])
             user_form.save()
             profile_form.save()
-            return render(request,
-                          'account/edit_done.html',
-                          {"username": username})
+            messages.success(request, "用户信息更新成功!")
+            # return render(request, 'account/edit_done.html', {"username": username})
+        else:
+            messages.error(request, "用户信息更新失败!")
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
