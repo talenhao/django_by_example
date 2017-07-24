@@ -117,3 +117,6 @@ EMAIL_HOST_PASSWORD = 'E8FCzckQ'
 EMAIL_USE_SSL = True
 
 DEFAULT_FROM_EMAIL = 'XXX@gmail.com'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

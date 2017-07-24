@@ -2,6 +2,8 @@ from django import forms
 
 from django.contrib.auth.models import User
 
+from .models import Profile
+
 
 # user login form
 class LoginForm(forms.Form):
@@ -22,3 +24,16 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password_repeat']:
             raise forms.ValidationError("确认密码不匹配,请重新输入!")
         return cd['password_repeat']
+
+
+# 用户profile edit form
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('date_of_birth', 'photo')

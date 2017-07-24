@@ -6,5 +6,6 @@
 
 {% block content %}
     <h1>用户中心</h1>
-    <p>欢迎来到你的用户中心!</p>
+    <p>欢迎来到{{ username }}用户中心!</p>
+    <p>你可以修改<a href="{% url 'edit' %}"> 用户信息 </a>或<a href="{% url 'password_change' %}"> 修改密码 </a> .</p>
 {% endblock %}

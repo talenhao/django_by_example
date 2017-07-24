@@ -32,4 +32,7 @@ urlpatterns = [
 
     # register
     url(r'^register/$', views.register, name='register'),
+
+    # edit profile
+    url(r'^edit/$', views.profile_edit, name='edit'),
 ]

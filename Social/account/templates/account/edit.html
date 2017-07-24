@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+    编辑用户配置
+{% endblock %}
+
+{% block content %}
+    <h1>编辑用户配置</h1>
+    <p>编写下面的表格修改用户配置:</p>
+    <form action="." enctype="multipart/form-data" method="post">
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        {% csrf_token %}
+        <input value="保存" type="submit">
+    </form>
+{% endblock %}
