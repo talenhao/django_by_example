@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 
 
+# 自定义认证需要两个method
 class EmailAuthBackend(object):
     def authenticate(self, username=None, password=None):
         try:
@@ -11,7 +12,7 @@ class EmailAuthBackend(object):
         except User.DoesNotExist:
             return None
 
-    def get_user(self,user_id):
+    def get_user(self, user_id):
         try:
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:

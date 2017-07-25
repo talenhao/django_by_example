@@ -5,6 +5,8 @@ from django.conf import settings
 
 
 # 创建扩展model
+# Django allows you to override the default user model by providing a value for the AUTH_USER_MODEL setting
+# that references a custom model: Default: 'auth.User'
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     date_of_birth = models.DateField(blank=True, null=True)

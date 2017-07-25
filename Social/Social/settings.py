@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
+    'images',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -124,9 +125,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 # add custom authentication
+# 按排列顺序逐一认证
+# 认证会存储在用户的session里
 AUTHENTICATION_BACKENDS = (
+    # 系统默认认证,不支持暴力破解保护
     'django.contrib.auth.backends.ModelBackend',
+    # 扩展EMAIL认证
     'account.authentication.EmailAuthBackend',
+    # github认证
     'social.backends.github.GithubOAuth2',
 )
 
