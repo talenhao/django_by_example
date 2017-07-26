@@ -12,7 +12,7 @@ from django.utils.text import slugify
 class Image(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='images_created')
-    user_like = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                   related_name='images_liked',
                                   blank=True)
     title = models.CharField(max_length=200)
