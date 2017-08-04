@@ -14,7 +14,7 @@ from django.core.urlresolvers import reverse
 class Image(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='images_created')
-    user_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='images_liked', blank=True)
+    users_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='images_liked', blank=True)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200,
                             blank=True)

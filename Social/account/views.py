@@ -14,6 +14,8 @@ from .forms import ProfileEditForm, UserEditForm
 
 from django.contrib import messages
 
+
+
 # post or get => form is valid => cleaned data => user 认证 => user active
 def user_login(request):
     if request.method == 'POST':
