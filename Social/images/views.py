@@ -13,6 +13,8 @@ from .models import Image
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
 
+# 自定义decorator
+from common.decorators import ajax_required
 
 @login_required
 def image_create(request):
@@ -42,7 +44,7 @@ def image_detail(request, id, slug):
                   {"image": image,
                    "section": "images"})
 
-
+@ajax_required
 @login_required
 @require_POST
 def image_like(request):
