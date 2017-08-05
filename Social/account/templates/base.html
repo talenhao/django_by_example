@@ -17,7 +17,7 @@
                     <a href="{% url "dashboard" %}">我的主页</a>
                 </li>
                 <li {% if section = "images" %} class="selected"{% endif %}>
-                    <a href="#">图片</a>
+                    <a href="{% url "images:list" %}">图片</a>
                 </li>
                 <li {% if section = "people" %} class="selected"{% endif %}>
                     <a href="#">朋友</a>

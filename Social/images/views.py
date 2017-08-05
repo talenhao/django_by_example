@@ -16,6 +16,10 @@ from django.http import JsonResponse
 # 自定义decorator
 from common.decorators import ajax_required
 
+from django.http import HttpResponse
+from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
+
+
 @login_required
 def image_create(request):
     if request.method == "POST":
@@ -61,3 +65,25 @@ def image_like(request):
         except:
             pass
     return JsonResponse({'status': 'ok'})
+
+
+@login_required
+def images_list(request):
+    # 1. 取出所有图片
+    images = Image.objects.all()
+    paginator = Paginator(images, 8)
+    page = request.GET.get('page')
+    try:
+        images = paginator.page(page)
+    except PageNotAnInteger:
+        images = paginator.page(1)
+    except EmptyPage:
+        if request.is_ajax():
+            return HttpResponse('')
+        images = paginator.page(paginator.num_pages)
+    if request.is_ajax():
+        return render(request,
+                      'images/image/list_ajax.html',
+                      {"section": 'images', 'images': images})
+    return render(request, 'images/image/list.html',
+                  {"section": 'images', "images": images})
