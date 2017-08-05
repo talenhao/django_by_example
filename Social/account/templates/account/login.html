@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+    用户登陆
+{% endblock %}
+
+{% block content %}
+    <h1>用户登陆</h1>
+    <p>赶写下面的信息登陆:</p>
+    <form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="登陆">
+    </form>
+{% endblock %}
