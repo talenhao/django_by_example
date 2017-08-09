@@ -139,3 +139,9 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_GITHUB_KEY = '242d25d2a05e410a92c5'
 SOCIAL_AUTH_GITHUB_SECRET = '284341b639cfc7a78c82bfeed5d95f09cd20818c'
+
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user' : lambda u : reverse_lazy('user_detail',
+                                          args=[u.username])
+}
