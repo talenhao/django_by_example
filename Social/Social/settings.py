@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'account',
     'django.contrib.admin',
     'django.contrib.auth',
+    # 与models交互
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -48,6 +49,8 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'images',
     'sorl.thumbnail',
+    # 关注的用户活动状态
+    'actions',
 )
 
 MIDDLEWARE_CLASSES = (
