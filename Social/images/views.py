@@ -15,10 +15,12 @@ from django.http import JsonResponse
 
 # 自定义decorator
 from common.decorators import ajax_required
-from actions.utils import create_action
 
 from django.http import HttpResponse
 from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
+
+# user actions
+from actions.utils import create_action
 
 
 @login_required

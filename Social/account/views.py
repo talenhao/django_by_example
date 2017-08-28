@@ -23,6 +23,8 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from common.decorators import ajax_required
 from .models import Contact
+
+#user actions
 from actions.utils import create_action
 
 
@@ -61,7 +63,7 @@ def register(request):
             new_user.set_password(user_register.cleaned_data['password'])
             new_user.save()
             profile = Profile.objects.create(user=new_user)
-            create_action(new_user, "has created an account", new_user)
+            create_action(new_user, "has created an account")
             return render(request, "account/register_done.html", {"new_user": new_user})
     else:
         user_register = UserRegistrationForm()
