@@ -24,8 +24,9 @@ from django.views.decorators.http import require_POST
 from common.decorators import ajax_required
 from .models import Contact
 
-#user actions
+# user actions
 from actions.utils import create_action
+from actions.models import Actions
 
 
 # post or get => form is valid => cleaned data => user 认证 => user active
@@ -51,8 +52,31 @@ def user_login(request):
 
 @login_required
 def dashboard(request):
+    # user actions
+    # exclude request myself user
+    # we retrieve all actions from the database, excluding the ones performed by the current user.
+    actions = Actions.objects.all().exclude(user=request.user)
+    # 动态多对多关联,在account/models中定义
+    following_ids = request.user.following.values_list('id', flat=True)
+    print(following_ids)
+    # 如果用户有follow其它用户,只显示相关用户的状态
+    if following_ids:
+        # select_related 适用于one-to-many, prefetch_related 适用于many-to-one, many-to-many
+        actions = actions.filter(user_id__in=following_ids)\
+            .select_related('user', 'user__profile')\
+            .prefetch_related('target')
+    actions = actions[:10]
+    print(actions)
+    
     username = " {} {} ".format(request.user.first_name, request.user.last_name)
-    return render(request, "account/dashboard.html", {"section": 'dashboard', "username": username})
+    return render(request,
+                  "account/dashboard.html",
+                  {
+                      "section": 'dashboard',
+                      "username": username,
+                      "actions": actions
+                  }
+                 )
 
 
 def register(request):

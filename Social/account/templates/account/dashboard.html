@@ -13,6 +13,10 @@
 <p>您已经收藏 {{ total_images_created }} 张image{{ total_images_created|pluralize }}.</p>
     {% endwith %}
     <p>拖动下面的按钮到收藏栏可以从其它网站收藏图片 → <a href="javascript:{% include "bookmarklet_launcher.js" %}" class="button">图片收藏</a><p>
-
-
+    <h2>正在发生的事:</h2>
+    <div id="action-list">
+        {% for action in actions %}
+            {% include "action/detail.html" %}
+        {% endfor %}
+    </div>
 {% endblock %}

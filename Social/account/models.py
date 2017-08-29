@@ -33,7 +33,9 @@ class Contact(models.Model):
         return "{} follows {}".format(self.user_from,
                                       self.user_to)
 
-
+# We are going to take a slightly different approach,
+# by adding this field dynamically to the User model.
+# Edit the models.py file of the account application and add the following lines:
 User.add_to_class("following",
                   models.ManyToManyField('self',
                                          through=Contact,
