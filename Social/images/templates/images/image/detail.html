@@ -21,6 +21,11 @@
                     </span>
                     like{{ total_likes|pluralize }}.
                 </span>
+                <span class="count">
+                    <span class="total">{{ total_views }}
+                        view{{ total_views|pluralize }}
+                    </span>
+                </span>
                 <a href="#" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like button">
                     {% if request.user not in users_like %}
                         Like
@@ -41,7 +46,9 @@
                 还没有人稀稀这张图片。
             {% endfor %}
         </div>
+
     {% endwith %}
+
 {% endblock %}
 
 {% block domready %}

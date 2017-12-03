@@ -22,6 +22,13 @@ from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
 # user actions
 from actions.utils import create_action
 
+# use redis
+import redis
+from django.conf import settings
+redis_connect = redis.StrictRedis(host=settings.REDIS_HOST,
+                                  port=settings.REDIS_PORT,
+                                  db=settings.REDIS_DB)
+
 
 @login_required
 def image_create(request):
@@ -47,10 +54,13 @@ def image_create(request):
 # create a detail page
 def image_detail(request, id, slug):
     image = get_object_or_404(Image, id=id, slug=slug)
+    # 使用redis的incr操作每次+1
+    total_views = redis_connect.incr("image:{}:views".format(image.id))
     return render(request,
                   "images/image/detail.html",
                   {"image": image,
-                   "section": "images"})
+                   "section": "images",
+                   "total_views": total_views})
 
 @ajax_required
 @login_required
