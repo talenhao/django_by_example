@@ -9,7 +9,7 @@
 <body>
     <div id="header">
         <span class="logo">
-            人比车帅的交流圈
+            车子有点帅的交流圈
         </span>
         {% if request.user.is_authenticated %}
             <ul class="menu">
@@ -20,7 +20,7 @@
                     <a href="{% url "images:list" %}">图片</a>
                 </li>
                 <li {% if section = "people" %} class="selected"{% endif %}>
-                    <a href="#">朋友</a>
+                    <a href="{% url "user_list" %}">朋友</a>
                 </li>
             </ul>
         {% endif %}

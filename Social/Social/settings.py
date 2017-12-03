@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'account',
     'django.contrib.admin',
     'django.contrib.auth',
+    # 与models交互
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -48,6 +49,8 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'images',
     'sorl.thumbnail',
+    # 关注的用户活动状态
+    'actions',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -139,3 +142,9 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_GITHUB_KEY = '242d25d2a05e410a92c5'
 SOCIAL_AUTH_GITHUB_SECRET = '284341b639cfc7a78c82bfeed5d95f09cd20818c'
+
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user' : lambda u : reverse_lazy('user_detail',
+                                          args=[u.username])
+}
